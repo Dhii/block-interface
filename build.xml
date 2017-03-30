@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Dhii Repo Boostrap" default="init" basedir="." description="">
+
+    <property name="quiet" value="false" />
+
+    <!--
+        VARIABLE DEFAULTS
+    -->
+    <property name="default.composer.vendor"       value="dhii" />
+    <property name="default.composer.name"         value="new-project" />
+    <property name="default.composer.desc"         value="" />
+    <property name="default.composer.type"         value="library" />
+    <property name="default.composer.license"      value="MIT" />
+    <property name="default.composer.author"       value="Dhii Team" />
+    <property name="default.composer.email"        value="development@dhii.co" />
+    <property name="default.composer.minstab"      value="dev" />
+    <property name="default.composer.phpver"       value="^5.3 | ^7.0" />
+    <property name="default.composer.autoload.ns"  value="Dhii\\NewProject\\" />
+    <property name="default.composer.autoload.dir" value="src" />
+
+    <!--
+        VARIABLE PROMPTS
+    -->
+    <if>
+        <isfalse value="${quiet}" />
+        <then>
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.vendor}"       propertyName="composer.vendor"       promptText="Vendor" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.name}"         propertyName="composer.name"         promptText="Package Name"/>
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.desc}"         propertyName="composer.desc"         promptText="Description"/>
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.type}"         propertyName="composer.type"         promptText="Package Type" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.license}"      propertyName="composer.license"      promptText="License" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.author}"       propertyName="composer.author"       promptText="Author Name" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.email}"        propertyName="composer.email"        promptText="Author Email" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.minstab}"      propertyName="composer.minstab"      promptText="Minimum Stability" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.phpver}"       propertyName="composer.phpver"       promptText="PHP Version Constraint" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.ns}"  propertyName="composer.autoload.ns"  promptText="PSR-4 Autoload Namespace" />
+            <propertyprompt useExistingValue="true" defaultValue="${default.composer.autoload.dir}" propertyName="composer.autoload.dir" promptText="PSR-4 Autoload Directory" />
+        </then>
+    </if>
+
+    <!--
+        VARIABLE COMPUTATION
+    -->
+    <property name="netbeans.project.name" value="${composer.vendor} - ${composer.name}" />
+    <propertyregex property="composer.autoload.ns"
+        override="true"
+        subject="${composer.autoload.ns}"
+        pattern="\\"
+        replace="\\\\" />
+
+    <!--
+        OTHER VARS
+    -->
+    <property name="file.nb.project.xml"        value="project.xml" />
+    <property name="file.nb.project.properties" value="project.properties" />
+
+    <property name="file.composer.json"         value="composer.json" />
+    <property name="template.composer.json"     value="composer.json.template" />
+
+    <property name="file.readme.md"             value="README.md" />
+    <property name="template.readme.md"         value="README.md.template" />
+
+    <!--
+        FILESETS
+    -->
+    <fileset id="netbeans.project.xml" dir="./nbproject">
+        <include pattern="${file.nb.project.xml}" />
+    </fileset>
+
+    <fileset id="netbeans.project.properties" dir="./nbproject">
+        <include pattern="${file.nb.project.properties}" />
+    </fileset>
+
+    <fileset id="composer.json" dir=".">
+        <include pattern="${file.composer.json}" />
+    </fileset>
+
+    <fileset id="readme.md" dir=".">
+        <include pattern="${file.readme.md}" />
+    </fileset>
+
+    <fileset id="git.keep.files" dir=".">
+        <include pattern="**/.gitkeep" />
+    </fileset>
+
+    <!--
+        MAIN TARGET
+    -->
+    <target name="init" depends="files.init, composer.init, netbeans.init, readme.init, git.init, finalize">
+    </target>
+
+    <!--
+        Initializes the files
+    -->
+    <target name="files.init">
+        <move file="${template.composer.json}" tofile="${file.composer.json}" overwrite="true" />
+        <move file="${template.readme.md}"     tofile="${file.readme.md}" overwrite="true" />
+    </target>
+
+    <!--
+        COMPOSER PACKAGE INITIALIZER
+        Replaces the tokens in composer.json
+    -->
+    <target name="composer.init" description="Sets the composer package info">
+        <reflexive>
+            <fileset refid="composer.json" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\[\*composer\.vendor\*\]"       replace="${composer.vendor}" />
+                    <regexp pattern="\[\*composer\.name\*\]"         replace="${composer.name}" />
+                    <regexp pattern="\[\*composer\.desc\*\]"         replace="${composer.desc}" />
+                    <regexp pattern="\[\*composer\.type\*\]"         replace="${composer.type}" />
+                    <regexp pattern="\[\*composer\.license\*\]"      replace="${composer.license}" />
+                    <regexp pattern="\[\*composer\.author\*\]"       replace="${composer.author}" />
+                    <regexp pattern="\[\*composer\.email\*\]"        replace="${composer.email}" />
+                    <regexp pattern="\[\*composer\.minstab\*\]"      replace="${composer.minstab}" />
+                    <regexp pattern="\[\*composer\.phpver\*\]"       replace="${composer.phpver}" />
+                    <regexp pattern="\[\*composer\.autoload.ns\*\]"  replace="${composer.autoload.ns}" />
+                    <regexp pattern="\[\*composer\.autoload.dir\*\]" replace="${composer.autoload.dir}" />
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        NETBEANS PROJECT FILES INITIALIZER
+        Main target for NB project file modifications
+    -->
+    <target name="netbeans.init" description="" depends="netbeans.init.project.xml, netbeans.init.project.properties">
+    </target>
+
+    <!--
+        NETBEANS PROJECT XML FILE
+        Replaces tokens in the NB project XML file
+    -->
+    <target name="netbeans.init.project.xml" description="Updates the NetBeans Project Info File">
+        <reflexive>
+            <fileset refid="netbeans.project.xml" />
+            <filterchain>
+                <replacetokens begintoken="[*" endtoken="*]">
+                    <token key="netbeans.project.name" value="${netbeans.project.name}" />
+                </replacetokens>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        NETBEANS PROJECT PROPERTIES FILE
+        Replaces tokens in the NB properties file
+    -->
+    <target name="netbeans.init.project.properties" description="Updates the NetBeans Properties File">
+        <reflexive>
+            <fileset refid="netbeans.project.properties" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\[\*netbeans\.project\.name\*\]"  replace="${composer.name}"/>
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        README UPDATER
+        Updates the readme with the package name and description.
+    -->
+    <target name="readme.init" description="">
+        <reflexive>
+            <fileset refid="readme.md" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="\[\*composer\.vendor\*\]"       replace="${composer.vendor}" />
+                    <regexp pattern="\[\*composer\.name\*\]"         replace="${composer.name}" />
+                    <regexp pattern="\[\*composer\.desc\*\]"         replace="${composer.desc}" />
+                    <regexp pattern="\[\*composer\.type\*\]"         replace="${composer.type}" />
+                    <regexp pattern="\[\*composer\.license\*\]"      replace="${composer.license}" />
+                    <regexp pattern="\[\*composer\.author\*\]"       replace="${composer.author}" />
+                    <regexp pattern="\[\*composer\.email\*\]"        replace="${composer.email}" />
+                    <regexp pattern="\[\*composer\.minstab\*\]"      replace="${composer.minstab}" />
+                    <regexp pattern="\[\*composer\.phpver\*\]"       replace="${composer.phpver}" />
+                    <regexp pattern="\[\*composer\.autoload.ns\*\]"  replace="${composer.autoload.ns}" />
+                    <regexp pattern="\[\*composer\.autoload.dir\*\]" replace="${composer.autoload.dir}" />
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <!--
+        Initializes GIT repository
+    -->
+    <target name="git.init">
+        <exec command="rm -rf .git" />
+        <exec command="git init" />
+        <exec command="git checkout -b master" />
+        <exec command="git checkout -b develop" />
+    </target>
+
+    <!--
+        Finalization
+    -->
+    <target name="finalize">
+        <delete>
+            <fileset refid="git.keep.files" />
+        </delete>
+    </target>
+
+</project>
