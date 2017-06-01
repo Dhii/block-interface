@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dhii\Block": "src"
+            "Dhii\\Block\\": "src"
         }
     }
 }
