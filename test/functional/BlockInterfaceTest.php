@@ -26,12 +26,10 @@ class BlockInterfaceTest extends TestCase
      *
      * @return BlockInterface
      */
-    public function createInstance()
+    public function createInstance($output = '')
     {
         $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-            ->__toString(function() {
-                return 'foobar';
-            })
+            ->__toString($output)
             ->new();
 
         return $mock;
@@ -59,11 +57,17 @@ class BlockInterfaceTest extends TestCase
         );
     }
 
+    /**
+     * Tests whether the block can be cast into a string.
+     *
+     * @since [*next-version*]
+     */
     public function testCanBeCastToString()
     {
-        $subject = $this->createInstance();
-        $string  = (string) $subject;
+        $expected = 'foobar';
+        $subject  = $this->createInstance($expected);
+        $string   = $subject->render();
 
-        $this->assertEquals('foobar', $string, 'Subject did not cast to string "foobar".');
+        $this->assertEquals($expected, $string, 'Subject did not render correctly.');
     }
 }
