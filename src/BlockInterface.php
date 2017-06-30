@@ -13,4 +13,12 @@ use Dhii\Util\String\StringableInterface;
  */
 interface BlockInterface extends StringableInterface
 {
+    /**
+     * Retrieves the rendered output for this block.
+     *
+     * @since [*next-version*]
+     *
+     * @return string|StringableInterface
+     */
+    public function render();
 }
