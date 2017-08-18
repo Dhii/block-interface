@@ -2,6 +2,7 @@
 
 namespace Dhii\Block;
 
+use Dhii\Output\RendererInterface;
 use Dhii\Util\String\StringableInterface;
 
 /**
@@ -11,14 +12,8 @@ use Dhii\Util\String\StringableInterface;
  *
  * @since [*next-version*]
  */
-interface BlockInterface extends StringableInterface
+interface BlockInterface extends
+    RendererInterface,
+    StringableInterface
 {
-    /**
-     * Retrieves the rendered output for this block.
-     *
-     * @since [*next-version*]
-     *
-     * @return string|StringableInterface
-     */
-    public function render();
 }

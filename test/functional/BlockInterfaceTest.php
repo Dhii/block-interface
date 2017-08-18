@@ -24,13 +24,15 @@ class BlockInterfaceTest extends TestCase
      *
      * @since [*next-version*]
      *
+     * @param string $output
+     *
      * @return BlockInterface
      */
     public function createInstance($output = '')
     {
         $mock = $this->mock(static::TEST_SUBJECT_CLASSNAME)
-            ->render()
             ->__toString($output)
+            ->render()
             ->new();
 
         return $mock;
@@ -55,6 +57,12 @@ class BlockInterfaceTest extends TestCase
             'Dhii\\Util\\String\\StringableInterface',
             $subject,
             'Subject is not a valid StringableInterface instance.'
+        );
+
+        $this->assertInstanceOf(
+            'Dhii\\Output\\RendererInterface',
+            $subject,
+            'Subject is not a valid RendererInterface instance.'
         );
     }
 
