@@ -1,8 +1,7 @@
 <?php
 
-namespace Dhii\Block;
+namespace Dhii\Output;
 
-use Dhii\Output\RendererInterface;
 use Dhii\Util\String\StringableInterface;
 
 /**

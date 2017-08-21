@@ -1,5 +1,5 @@
 {
-    "name": "dhii/block-interface",
+    "name": "dhii/output-block-interface",
     "description": "Interfaces for output blocks.",
     "type": "library",
     "license": "MIT",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dhii\\Block\\": "src"
+            "Dhii\\Output\\": "src"
         }
     },
     "scripts": {

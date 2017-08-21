@@ -1,12 +1,12 @@
 <?php
 
-namespace Dhii\Block\UnitTest;
+namespace Dhii\Output\UnitTest;
 
 use Dhii\Block\BlockInterface;
 use Xpmock\TestCase;
 
 /**
- * Tests {@see \Dhii\Block\BlockInterface}.
+ * Tests {@see \Dhii\Output\BlockInterface}.
  *
  * @since [*next-version*]
  */
@@ -17,7 +17,7 @@ class BlockInterfaceTest extends TestCase
      *
      * @since [*next-version*]
      */
-    const TEST_SUBJECT_CLASSNAME = 'Dhii\Block\BlockInterface';
+    const TEST_SUBJECT_CLASSNAME = 'Dhii\Output\BlockInterface';
 
     /**
      * Creates a new instance of the test subject.
