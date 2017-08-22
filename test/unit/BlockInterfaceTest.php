@@ -1,6 +1,6 @@
 <?php
 
-namespace Dhii\Block\FuncTest;
+namespace Dhii\Block\UnitTest;
 
 use Dhii\Block\BlockInterface;
 use Xpmock\TestCase;
