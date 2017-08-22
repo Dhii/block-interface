@@ -3,10 +3,10 @@
 namespace Dhii\Block\FuncTest;
 
 use Xpmock\TestCase;
-use Dhii\Block\BlockAwareInterface;
+use Dhii\Output\BlockAwareInterface;
 
 /**
- * Tests {@see \Dhii\Block\BlockAwareInterface}.
+ * Tests {@see \Dhii\Output\BlockAwareInterface}.
  *
  * @since [*next-version*]
  */
@@ -17,7 +17,7 @@ class BlockAwareInterfaceTest extends TestCase
      *
      * @since [*next-version*]
      */
-    const TEST_SUBJECT_CLASSNAME = 'Dhii\Block\BlockAwareInterface';
+    const TEST_SUBJECT_CLASSNAME = 'Dhii\Output\BlockAwareInterface';
 
     /**
      * Creates a new instance of the test subject.

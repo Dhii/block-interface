@@ -1,6 +1,6 @@
 <?php
 
-namespace Dhii\Block;
+namespace Dhii\Output;
 
 /**
  * Something that is aware of a block.
