@@ -9,8 +9,6 @@ use Dhii\Util\String\StringableInterface;
  *
  * @since [*next-version*]
  */
-interface BlockInterface extends
-    RendererInterface,
-    StringableInterface
+interface BlockInterface extends StringableInterface
 {
 }
