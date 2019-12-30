@@ -7,6 +7,9 @@
 
 Interfaces for output blocks.
 
+⚠ **THIS PACKAGE IS NO LONGER MAINTAINED**. See [`dhii/output-renderer-interface`][].
+
 This package complies with [Dhii] standards
 
 [Dhii]: https://github.com/Dhii/dhii
+[`dhii/output-renderer-interface`]: https://packagist.org/packages/dhii/output-renderer-interface
